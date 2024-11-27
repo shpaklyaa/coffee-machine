@@ -1,9 +1,6 @@
 #ifndef INGREDIENTS_H
 #define INGREDIENTS_H
 
-#include <iostream>
-#include <string>
-
 class Ingredient
 {
 private:
