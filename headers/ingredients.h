@@ -1,59 +1,55 @@
 #ifndef INGREDIENTS_H
 #define INGREDIENTS_H
 
-class Ingredient
-{
+// Класс ингредиентов
+class Ingredient {
 private:
-    int amount;
-    int temperature;
-    int time;
-
+    int temperature; // температура
+    int amount; // количество
+    int time; // время, которое они требуют
 public:
-    Ingredient() : amount(0), temperature(24), time(0) {}
-
-    void setAmount(const int newAmount);
-    int getAmount();
-
-    void setTemp(const int newTemperature);
-    int getTemp();
-
-    void setTime(const int newTime);
-    int getTime();
+    Ingredient() : temperature(24), amount(0), time(0) {}
+    void setTemperature(int t);
+    int getTemperature() const;
+    void setAmount(int a);
+    int getAmount() const;
+    void setTime(int t);
+    int getTime() const;
 };
 
-class DryIngredient : public Ingredient
-{
+// Класс мокрых ингредиентов
+class WetIngredient : public Ingredient {
+    //
 };
 
-class WetIngredient : public Ingredient
-{
+// Класс сухих ингредиентов
+class DryIngredient : public Ingredient {
+    //
 };
 
-class Milk : public WetIngredient
-{
-};
-
-class Cream : public WetIngredient
-{
-};
-
-class Water : public WetIngredient
-{
-};
-
-class Sugar : public DryIngredient
-{
-};
-
-class CoffeeBeans : public DryIngredient
-{
+// Класс кофейных зёрен
+class CoffeeBeans : public DryIngredient {
 private:
     bool is_grinded;
-
 public:
     CoffeeBeans() : is_grinded(false) {}
     void setStatus(bool s);
     bool getStatus() const;
 };
 
-#endif
+// Класс сахар
+class Sugar : public DryIngredient {
+    // 
+};
+
+// Класс молоко
+class Milk : public WetIngredient {
+    // 
+};
+
+// Класс вода
+class Water : public WetIngredient {
+    // 
+};
+
+#endif // INGREDIENTS_H

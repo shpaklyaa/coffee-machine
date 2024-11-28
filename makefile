@@ -13,10 +13,10 @@ HEADERSDIR = headers
 TARGET = $(BINDIR)/coffee_machine
 
 # Заголовочные файлы
-HEADERS = $(HEADERSDIR)/coffee_machine.h $(HEADERSDIR)/ingredients.h $(HEADERSDIR)/recipe.h $(HEADERSDIR)/menu.h $(HEADERSDIR)/recipe_parser.h
+HEADERS = $(HEADERSDIR)/coffee_machine.h $(HEADERSDIR)/ingredients.h $(HEADERSDIR)/recipes.h $(HEADERSDIR)/menu.h $(HEADERSDIR)/parser.h
 
 # Исходные файлы
-SRC = $(SRCDIR)/coffee_machine.cpp $(SRCDIR)/ingredients.cpp $(SRCDIR)/main.cpp $(SRCDIR)/recipe.cpp $(SRCDIR)/menu.cpp $(SRCDIR)/recipe_parser.cpp
+SRC = $(SRCDIR)/coffee_machine.cpp $(SRCDIR)/ingredients.cpp $(SRCDIR)/main.cpp $(SRCDIR)/recipes.cpp $(SRCDIR)/menu.cpp $(SRCDIR)/parser.cpp
 
 # Объектные файлы
 OBJ = $(SRC:.cpp=.o)

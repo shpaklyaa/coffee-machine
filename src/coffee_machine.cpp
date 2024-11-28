@@ -1,186 +1,47 @@
 #include "coffee_machine.h"
 
-void CoffeeGrinder::GrindCoffeeBeans(CoffeeBeans &beans)
+void CoffeeGrinder::grind(CoffeeBeans &c)
 {
-    std::cout << "Сколько порций кофе добавить?" << std::endl;
-    std::cin >> coffeeDose;
-    std::cout << "Помол кофе в процессе..." << std::endl;
-    beans.setTime(beans.getTime() + (14 + rand() % (19 - 14 + 1)) * coffeeDose);
-    beans.setStatus(true);
-    beans.setAmount(coffeeDose);
-    // for (int i = 0; i < coffeeDose; i++)
-    // {
-    //     machine.time_sum += 14 + rand() % (19 - 14 + 1);
-    // }
-    std::cout << "Помол кофе завершен!" << std::endl;
+    int time = 14 + rand() % (19 - 14 + 1);
+    c.setTime(c.getTime() + time);
+    c.setStatus(true);
 }
 
-// void Group::ShowCoffeeDose(CoffeeGrinder &grinder){
-//     int coffeeDose = grinder.coffeeDose;
-// }
-
-void Group::BrewCoffee(CoffeeBeans &beans)
+void Group::boil(CoffeeBeans &c)
 {
-    if (beans.getStatus())
-
+    if (c.getStatus())
     {
-        std::cout << "Варка кофе в процессе..." << std::endl;
-        beans.setTime(beans.getTime() + (19 + rand() % (24 - 19 + 1)) * beans.getAmount());
-        // for (int i = 0; i < grinder.coffeeDose; i++)
-        // {
-        //     machine.time_sum += 19 + rand() % (24 - 19 + 1);
-        // }
-        std::cout << "Кофе готов!" << std::endl;
+        int time = 19 + rand() % (24 - 19 + 1);
+        c.setTime(c.getTime() + time);
     }
     else
     {
-        std::cout << "system error : code 1" << std::endl;
         return;
     }
 }
 
-void Boiler::HeatWater(Water &water)
+void Boiler::heat(Water &w)
 {
-    std::cout << "Сколько порций воды добавить?" << std::endl;
-    std::cin >> waterDose;
-    std::cout << "Нагрев воды до 100 градусов..." << std::endl;
-    int toAdd = 100 - water.getTemp();
-    water.setTemp(water.getTemp() + toAdd);
-    water.setTime(water.getTime() + toAdd);
-    water.setAmount(waterDose);
-    std::cout << "Вода нагрета!" << std::endl;
+    int toAdd = 100 - w.getTemperature();
+    w.setTemperature(w.getTemperature() + toAdd);
+    w.setTime(w.getTime() + toAdd);
 }
 
-void Nozzle::HeatWetIng(WetIngredient &wetIng)
+void Nozzle::heat(WetIngredient &wi)
 {
-    do
-    {
-        std::cout << "Выберите Молочную добавку:\n";
-        std::cout << "1. Молоко\n";
-        std::cout << "2. Сливки\n";
-        std::cout << "0. Выход\n";
-        std::cout << "Введите свой выбор: ";
-
-        std::cin >> choice;
-
-        int toAdd;
-
-        switch (choice)
-        {
-        case 1:
-            std::cout << "Вы выбрали молоко..." << std::endl;
-            std::cout << "Сколько порций молока добавить?" << std::endl;
-            std::cin >> wetDose;
-            std::cout << "Нагрев молока до 65-70 градусов..." << std::endl;
-            toAdd = (65 + rand() % (70 - 65 + 1)) - wetIng.getTemp();
-            wetIng.setTemp(wetIng.getTemp() + toAdd * wetDose);
-            wetIng.setTime(wetIng.getTime() + toAdd * wetDose);
-            wetIng.setAmount(wetDose);
-            std::cout << "Молоко готово!" << std::endl;
-            break;
-        case 2:
-            std::cout << "Вы выбрали сливки..." << std::endl;
-            std::cout << "Сколько порций сливок добавить?" << std::endl;
-            std::cin >> wetDose;
-            std::cout << "Нагрев сливок до 65-70 градусов..." << std::endl;
-            toAdd = (65 + rand() % (70 - 65 + 1)) - wetIng.getTemp();
-            wetIng.setTemp(wetIng.getTemp() + toAdd * wetDose);
-            wetIng.setTime(wetIng.getTime() + toAdd * wetDose);
-            wetIng.setAmount(wetDose);
-            std::cout << "Молоко нагрелось!" << std::endl;
-            break;
-        case 0:
-            std::cout << "Выход из программы." << std::endl;
-            break;
-        default:
-            std::cout << "Неверный выбор. Попробуйте снова." << std::endl;
-            break;
-        }
-
-        if (choice != 0)
-        {
-            std::cout << "Хотите сделать выбор снова? (1/0): ";
-            std::cin >> repeat;
-        }
-        else
-        {
-            repeat = '0'; // Если выбрали выход, завершить цикл
-        }
-
-    } while (repeat == '1');
+    int toAdd = (65 + rand() % (70 - 65 + 1)) - wi.getTemperature();
+    wi.setTemperature(wi.getTemperature() + toAdd);
+    wi.setTime(wi.getTime() + toAdd);
 }
 
-void Nozzle::MixDryIng(DryIngredient &dryIng)
+void Nozzle::mix(DryIngredient &di)
 {
-    do
-    {
-        std::cout << "Выберите добавку:\n";
-        std::cout << "1. Сахар\n";
-        std::cout << "2. Корица\n";
-        std::cout << "0. Выход\n";
-        std::cout << "Введите свой выбор: ";
-
-        std::cin >> choice;
-
-        switch (choice)
-        {
-        case 1:
-            std::cout << "Вы выбрали сахар..." << std::endl;
-            std::cout << "Сколько порций сахара добавить?" << std::endl;
-            std::cin >> dryDose;
-            std::cout << "Растворение сахара..." << std::endl;
-            dryIng.setTime(dryIng.getTime() + 10 * dryDose);
-            dryIng.setAmount(dryDose);
-            std::cout << "Сахар растворился!" << std::endl;
-            break;
-            break;
-        case 2:
-            std::cout << "Вы выбрали корицу..." << std::endl;
-            std::cout << "Корица добавлена!" << std::endl;
-            break;
-        case 0:
-            std::cout << "Выход из программы." << std::endl;
-            break;
-        default:
-            std::cout << "Неверный выбор. Попробуйте снова." << std::endl;
-            break;
-        }
-
-        if (choice != 0)
-        {
-            std::cout << "Хотите сделать выбор снова? (1/0): ";
-            std::cin >> repeat;
-        }
-        else
-        {
-            repeat = '0'; // Если выбрали выход, завершить цикл
-        }
-
-    } while (repeat == '1');
+    di.setTime(di.getTime() + 10);
 }
-
-// auto CoffeeMachine::CheckRecipe(Recipe &recipe, Recipe &r)
-// {
-//     for (auto ingredient : r.getIngredients())
-//     {
-//         if (ingredient.first == "молоко" && ingredient.second == nozzle.wetDose &&
-//             ingredient.first == "сливки" && ingredient.second == nozzle.wetDose &&
-//             ingredient.first == "вода" && ingredient.second == boiler.waterDose &&
-//             ingredient.first == "кофе" && ingredient.second == grinder.coffeeDose &&
-//             ingredient.first == "ванильный сахар" && ingredient.second == nozzle.dryDose)
-//         {
-//             return recipe.getName();
-//         }
-//         else
-//         {
-//             std::cout << "Неизвестный напиток." << std::endl;
-//         }
-//     }
-// }
 
 int CoffeeMachine::prepareCoffee(Recipe &r)
 {
-    // r.getIngredients();
+    r.getIngredients();
     int allTime = 0;
     for (auto ingredient : r.getIngredients())
     {
@@ -189,9 +50,9 @@ int CoffeeMachine::prepareCoffee(Recipe &r)
             srand(time(NULL));
             for (int i = 0; i < ingredient.second; i++)
             {
-                WetIngredient wetIng;
-                nozzle.HeatWetIng(wetIng);
-                allTime += wetIng.getTime();
+                Milk milk;
+                nozzle.heat(milk);
+                allTime += milk.getTime();
             }
         }
         else if (ingredient.first == "кофе")
@@ -199,19 +60,19 @@ int CoffeeMachine::prepareCoffee(Recipe &r)
             srand(time(NULL));
             for (int i = 0; i < ingredient.second; i++)
             {
-                CoffeeBeans beans;
-                grinder.GrindCoffeeBeans(beans);
-                group.BrewCoffee(beans);
-                allTime += beans.getTime();
+                CoffeeBeans cb;
+                grinder.grind(cb);
+                group.boil(cb);
+                allTime += cb.getTime();
             }
         }
         else if (ingredient.first == "вода")
         {
             for (int i = 0; i < ingredient.second; i++)
             {
-                Water water;
-                boiler.HeatWater(water);
-                allTime += water.getTime();
+                Water w;
+                boiler.heat(w);
+                allTime += w.getTime();
             }
         }
         else if (ingredient.first == "ванильный сахар")
@@ -219,7 +80,7 @@ int CoffeeMachine::prepareCoffee(Recipe &r)
             for (int i = 0; i < ingredient.second; i++)
             {
                 DryIngredient sugar;
-                nozzle.MixDryIng(sugar);
+                nozzle.mix(sugar);
                 allTime += sugar.getTime();
             }
         }

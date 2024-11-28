@@ -1,8 +1,8 @@
 #include <iostream>
 #include "coffee_machine.h"
 #include "ingredients.h"
-#include "recipe.h"
-#include "recipe_parser.h"
+#include "recipes.h"
+#include "parser.h"
 #include "menu.h"
 
 using namespace std;

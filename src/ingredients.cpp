@@ -1,32 +1,31 @@
-#include <iostream>
 #include "ingredients.h"
 
-void Ingredient::setAmount(const int newAmount)
-{
-    amount = newAmount;
-}
-
-int Ingredient::getAmount()
-{
-    return amount;
-}
-
-void Ingredient::setTemp(const int newTemperature)
+void Ingredient::setTemperature(int newTemperature)
 {
     temperature = newTemperature;
 }
 
-int Ingredient::getTemp()
+int Ingredient::getTemperature() const
 {
     return temperature;
 }
 
-void Ingredient::setTime(const int newTime)
+void Ingredient::setAmount(int newAmount)
+{
+    amount = newAmount;
+}
+
+int Ingredient::getAmount() const
+{
+    return amount;
+}
+
+void Ingredient::setTime(int newTime)
 {
     time = newTime;
 }
 
-int Ingredient::getTime()
+int Ingredient::getTime() const
 {
     return time;
 }
