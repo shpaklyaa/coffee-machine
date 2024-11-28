@@ -11,14 +11,12 @@ class CoffeeGrinder
 {
 public:
     int coffeeDose = 0;
-    CoffeeMachine machine;
     void GrindCoffeeBeans(CoffeeBeans &beans);
 };
 
 class Group
 {
 public:
-    CoffeeMachine machine;
     // void ShowCoffeeDose(CoffeeGrinder &grinder);
     void BrewCoffee(CoffeeBeans &beans);
 };
@@ -30,7 +28,6 @@ private:
 
 public:
     int waterDose = 0;
-    CoffeeMachine machine;
     int currentWaterTemperature;
     void HeatWater(Water &water);
 };
@@ -40,7 +37,6 @@ class Nozzle
 public:
     int choice = 0;
     char repeat;
-    CoffeeMachine machine;
     int currentTemperature;
     int wetDose = 0;
     int dryDose = 0;

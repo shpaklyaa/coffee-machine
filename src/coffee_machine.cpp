@@ -63,6 +63,8 @@ void Nozzle::HeatWetIng(WetIngredient &wetIng)
 
         std::cin >> choice;
 
+        int toAdd;
+
         switch (choice)
         {
         case 1:
@@ -70,7 +72,7 @@ void Nozzle::HeatWetIng(WetIngredient &wetIng)
             std::cout << "Сколько порций молока добавить?" << std::endl;
             std::cin >> wetDose;
             std::cout << "Нагрев молока до 65-70 градусов..." << std::endl;
-            int toAdd = (65 + rand() % (70 - 65 + 1)) - wetIng.getTemp();
+            toAdd = (65 + rand() % (70 - 65 + 1)) - wetIng.getTemp();
             wetIng.setTemp(wetIng.getTemp() + toAdd * wetDose);
             wetIng.setTime(wetIng.getTime() + toAdd * wetDose);
             wetIng.setAmount(wetDose);
@@ -81,7 +83,7 @@ void Nozzle::HeatWetIng(WetIngredient &wetIng)
             std::cout << "Сколько порций сливок добавить?" << std::endl;
             std::cin >> wetDose;
             std::cout << "Нагрев сливок до 65-70 градусов..." << std::endl;
-            int toAdd = (65 + rand() % (70 - 65 + 1)) - wetIng.getTemp();
+            toAdd = (65 + rand() % (70 - 65 + 1)) - wetIng.getTemp();
             wetIng.setTemp(wetIng.getTemp() + toAdd * wetDose);
             wetIng.setTime(wetIng.getTime() + toAdd * wetDose);
             wetIng.setAmount(wetDose);
@@ -157,24 +159,28 @@ void Nozzle::MixDryIng(DryIngredient &dryIng)
     } while (repeat == '1');
 }
 
-auto CoffeeMachine::CheckRecipe(Recipe &recipe, Recipe &r)
-{
-    for (auto ingredient : r.getIngredients())
-    {
-        if (ingredient.first == "молоко" && ingredient.second == nozzle.wetDose &&
-            ingredient.first == "сливки" && ingredient.second == nozzle.wetDose &&
-            ingredient.first == "вода" && ingredient.second == boiler.waterDose &&
-            ingredient.first == "кофе" && ingredient.second == grinder.coffeeDose &&
-            ingredient.first == "ванильный сахар" && ingredient.second == nozzle.dryDose)
-        {
-            return recipe.getName();
-        }
-    }
-}
+// auto CoffeeMachine::CheckRecipe(Recipe &recipe, Recipe &r)
+// {
+//     for (auto ingredient : r.getIngredients())
+//     {
+//         if (ingredient.first == "молоко" && ingredient.second == nozzle.wetDose &&
+//             ingredient.first == "сливки" && ingredient.second == nozzle.wetDose &&
+//             ingredient.first == "вода" && ingredient.second == boiler.waterDose &&
+//             ingredient.first == "кофе" && ingredient.second == grinder.coffeeDose &&
+//             ingredient.first == "ванильный сахар" && ingredient.second == nozzle.dryDose)
+//         {
+//             return recipe.getName();
+//         }
+//         else
+//         {
+//             std::cout << "Неизвестный напиток." << std::endl;
+//         }
+//     }
+// }
 
 int CoffeeMachine::prepareCoffee(Recipe &r)
 {
-    r.getIngredients();
+    // r.getIngredients();
     int allTime = 0;
     for (auto ingredient : r.getIngredients())
     {

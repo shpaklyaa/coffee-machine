@@ -28,6 +28,7 @@ void Menu::start(std::vector<Recipe> r, CoffeeMachine &cm)
 {
     while (true)
     {
+        // printVector(std::vector<Recipe> r);
         std::cout << "+---------------------------------------------------------------------------------------------------------------------+" << std::endl;
         std::cout << "|                                                       Добро пожаловать!                                             |" << std::endl;
         std::cout << "| С помощью нашей кофемашины вы можете сварить себе кофе по уже известному рецепту, либо же попробовать что-то новое! |" << std::endl;
@@ -51,9 +52,10 @@ void Menu::start(std::vector<Recipe> r, CoffeeMachine &cm)
             std::cout << "Хватит баловаться!";
             break;
         }
-        cm.prepareCoffee(std::vector<Recipe> & r);
-        // Zapusk coffee_machine
-        // Конвертируем рецепт в обекты
-        // запускаем функции оброботки обектов(заварка)
+        for (int i = 0; i < r.size(); ++i)
+        {
+            cm.prepareCoffee(r[i]);
+            // cm.CheckRecipe(recipe[i], r[i]);
+        }
     }
 }

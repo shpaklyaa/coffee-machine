@@ -1,6 +1,7 @@
 #ifndef RECIPE_H
 #define RECIPE_H
 
+#include <iostream>
 #include <map>
 #include <string>
 
