@@ -87,3 +87,17 @@ int CoffeeMachine::prepareCoffee(Recipe &r)
     }
     return allTime;
 }
+
+ auto checkRecipe(Recipe &r, Order &o) {
+        for (auto ingredient : r.getIngredients()) {
+            for (auto ing : o.getIngredients()) {
+                if (ingredient.first == "молоко" && ingredient.second == ing.second ||
+                    ingredient.first == "сливки" && ingredient.second == ing.second ||
+                    ingredient.first == "кофе" && ingredient.second == ing.second ||
+                    ingredient.first == "вода" && ingredient.second == ing.second ||
+                    ingredient.first == "сахар" && ingredient.second == ing.second) {
+                        return r.getName();
+                }
+            }
+        }
+    }

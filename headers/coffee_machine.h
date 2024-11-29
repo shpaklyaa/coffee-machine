@@ -3,7 +3,9 @@
 
 #include "ingredients.h"
 #include "recipes.h"
+#include "order.h"
 #include "parser.h"
+#include "order_parser.h"
 #include <cstdlib>
 #include <ctime>
 
@@ -47,6 +49,7 @@ private:
 
 public:
     int prepareCoffee(Recipe &r);
+    auto checkRecipe(Recipe &r, Order &o);
 };
 
 #endif
