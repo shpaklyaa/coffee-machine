@@ -13,14 +13,14 @@
 // Интерфейс парсера
 class IOrderParser {
 public:
-    virtual void parse(std::string filename, std::vector<Order>& recipes) = 0;
+    virtual void parseOrder(std::string filename, std::vector<Order>& ords) = 0;
     virtual ~IOrderParser() {}
 };
 
 // Реализация парсера для файлов .txt
 class TextOrderParser : public IOrderParser {
 public:
-    void parse(std::string filename, std::vector<Order>& recipes) override;
+    void parseOrder(std::string filename, std::vector<Order>& ords) override;
 };
 
 #endif // PARSER_H

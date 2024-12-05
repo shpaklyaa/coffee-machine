@@ -1,16 +1,14 @@
 #include "order_parser.h"
 
-void TextOrderParser::parse(std::string filename, std::vector<Order> &o)
+void TextOrderParser::parseOrder(std::string filename, std::vector<Order> &o)
 {
     std::ifstream file;
     file.open(filename);
-
     std::string line;
 
     while (std::getline(file, line))
     {
         Order order;
-        std::string name;
         std::map<std::string, unsigned> ingredients;
 
         line = line.substr(line.find(':') + 1, line.size());

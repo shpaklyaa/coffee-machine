@@ -39,7 +39,7 @@ void Nozzle::mix(DryIngredient &di)
     di.setTime(di.getTime() + 10);
 }
 
-int CoffeeMachine::prepareCoffee(Recipe &r)
+int CoffeeMachine::prepareCoffee(const Recipe &r)
 {
     r.getIngredients();
     int allTime = 0;
@@ -88,16 +88,44 @@ int CoffeeMachine::prepareCoffee(Recipe &r)
     return allTime;
 }
 
- auto checkRecipe(Recipe &r, Order &o) {
-        for (auto ingredient : r.getIngredients()) {
-            for (auto ing : o.getIngredients()) {
-                if (ingredient.first == "молоко" && ingredient.second == ing.second ||
-                    ingredient.first == "сливки" && ingredient.second == ing.second ||
-                    ingredient.first == "кофе" && ingredient.second == ing.second ||
-                    ingredient.first == "вода" && ingredient.second == ing.second ||
-                    ingredient.first == "сахар" && ingredient.second == ing.second) {
-                        return r.getName();
-                }
-            }
-        }
-    }
+//  auto checkRecipe(Recipe &r, Order &o) {
+//         for (auto ingredient : r.getIngredients()) {
+//             for (auto ing : o.getIngredients()) {
+//                 if (ingredient.first == "молоко" && ingredient.second == ing.second ||
+//                     ingredient.first == "сливки" && ingredient.second == ing.second ||
+//                     ingredient.first == "кофе" && ingredient.second == ing.second ||
+//                     ingredient.first == "вода" && ingredient.second == ing.second ||
+//                     ingredient.first == "сахар" && ingredient.second == ing.second) {
+//                         bool flag = true; 
+//                         return r.getName();
+//                 }
+//             }
+//         }
+//     }
+
+// auto checkRecipe(<Recipe>& r, Order &o) {
+//     for (size_t i = 0; i < recipes.size(); ++i) {
+//         //const Recipe &r = recipes[i];
+//         bool flag = true;
+        
+//         for (auto ingredient : r.getIngredients()) {
+//             bool found = false;
+//             for (auto ing : o.getIngredients()) {
+//                 if (ingredient.first == ing.first && ingredient.second <= ing.second) {
+//                     found = true;
+//                     break;
+//                 }
+//             }
+//             if (!found) {  // Если ингредиент не найден
+//                 flag = false;
+//                 break;
+//             }
+//         }
+        
+//         if (flag) {
+//             return i;  // Возвращаем индекс найденного рецепта
+//         }
+//     }
+
+//     return -1;  // Возвращаем -1, если рецепт не найден
+// }

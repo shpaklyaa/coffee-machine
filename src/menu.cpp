@@ -30,6 +30,19 @@ void Print::printVector(std::vector<Recipe> r)
     }
 }
 
+bool Menu::canPrepareRecipe(const Order& order, const Recipe& recipe) {
+    auto recipeIngredients = recipe.getIngredients();
+    auto orderIngredients = order.getIngredients();
+    for (const auto& ingredient : recipeIngredients) {
+        const auto& name = ingredient.first;
+        unsigned requiredAmount = ingredient.second;
+
+        if (orderIngredients.find(name) == orderIngredients.end() || orderIngredients[name] < requiredAmount) {
+            return false;
+        }
+    }
+    return true;
+}
 void Menu::start(std::vector<Recipe> r, CoffeeMachine &cm)
 {
     while (true)
@@ -53,44 +66,60 @@ void Menu::start(std::vector<Recipe> r, CoffeeMachine &cm)
         };
         std::cout << "+-------------------------------------------------------------------+" << std::endl;
 
-        std::cout << "+------------------+" << std::endl;
-        std::cout << "| Выберете напиток:|" << std::endl;
-        std::cout << "+------------------+" << std::endl;
-        int input;
-        std::cin >> input;
+        Order order;
+        bool recipeFound = false;
+        for (const Recipe& recipe : r) {
+            if (canPrepareRecipe(order, recipe)) {
+                int totalPreparationTime = cm.prepareCoffee(recipe);
+                std::cout << "Приготовление: " << recipe.getName() 
+                          << " (Итоговое время: " << totalPreparationTime 
+                          << " секунд)" << std::endl;
+                recipeFound = true;
+                break;
+            }
+        }
 
-        if (input < 1 && input > r.size())
-        {
-            break;
-        }
-        std::string name = searchName(r, input);
-        std::cout << "+-------------------------------------------------------------------+" << std::endl;
-        std::cout << "| Вы выбрали: " << name << std::endl;
-        std::cout << "| Время изготовления: " << cm.prepareCoffee(r[input - 1]) << " сек" << std::endl;
-        std::cout << "+-------------------------------------------------------------------+" << std::endl;
+        if (!recipeFound) {
+            std::cout << "Ошибка: такой рецепт неизвестен или недостаточно ингредиентов." << std::endl;
+        }  
+        // std::cout << "+------------------+" << std::endl;
+        // std::cout << "| Выберете напиток:|" << std::endl;
+        // std::cout << "+------------------+" << std::endl;
+        // int input;
+        // std::cin >> input;
 
-        std::cout << "+-------------------+" << std::endl;
-        std::cout << "| Повторить (1/0)?  |\n";
-        std::cout << "+-------------------+" << std::endl;
-        std::cin >> off;
+        // if (input < 1 && input > r.size())
+        // {
+        //     break;
+        // }
+        // std::string name = searchName(r, input);
+        // std::cout << "+-------------------------------------------------------------------+" << std::endl;
+        // std::cout << "| Вы выбрали: " << name << std::endl;
+        // std::cout << "| Время изготовления: " << cm.prepareCoffee(r[input - 1]) << " сек" << std::endl;
+        // std::cout << "+-------------------------------------------------------------------+" << std::endl;
 
-        if (off == "0")
-        {
-            std::cout << "+-------------------+" << std::endl;
-            std::cout << "|  Машина выключена.|" << std::endl;
-            std::cout << "+-------------------+" << std::endl;
-            break;
-        }
-        else if (off == "1")
-        {
-            continue;
-        }
-        else
-        {
-            std::cout << "+-------------------+" << std::endl;
-            std::cout << "|      Ошибка!      |" << std::endl;
-            std::cout << "+-------------------+" << std::endl;
-            break;
-        }
+        // std::cout << "+-------------------+" << std::endl;
+        // std::cout << "| Повторить (1/0)?  |\n";
+        // std::cout << "+-------------------+" << std::endl;
+        // std::cin >> off;
+
+        // if (off == "0")
+        // {
+        //     std::cout << "+-------------------+" << std::endl;
+        //     std::cout << "|  Машина выключена.|" << std::endl;
+        //     std::cout << "+-------------------+" << std::endl;
+        //     break;
+        // }
+        // else if (off == "1")
+        // {
+        //     continue;
+        // }
+        // else
+        // {
+        //     std::cout << "+-------------------+" << std::endl;
+        //     std::cout << "|      Ошибка!      |" << std::endl;
+        //     std::cout << "+-------------------+" << std::endl;
+        //     break;
+        // }
     }
 }

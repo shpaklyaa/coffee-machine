@@ -18,4 +18,4 @@ public:
     std::map<std::string, unsigned> getIngredients() const;
 };
 
-#endif // 
+#endif

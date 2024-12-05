@@ -48,8 +48,9 @@ private:
     Nozzle nozzle;
 
 public:
-    int prepareCoffee(Recipe &r);
-    auto checkRecipe(Recipe &r, Order &o);
+    bool found = false;
+    int prepareCoffee(const Recipe &r);
+    //auto checkRecipe(Recipe &r, Order &o);
 };
 
 #endif
