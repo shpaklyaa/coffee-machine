@@ -1,1 +1,2 @@
-Order:water(1),coffee(1)
+Order:milk(2),coffee(1)
+Order:milk(90),coffee(90),water(90),sugar(12)
