@@ -7,22 +7,25 @@
 #include <iostream>
 #include <algorithm>
 #include <map>
+#include <sstream>
 
 #include "recipes.h"
 
 // class Recipe;
 
 // Интерфейс парсера
-class IRecipeParser {
+class IRecipeParser
+{
 public:
-    virtual void parse(std::string filename, std::vector<Recipe>& recipes) = 0;
+    virtual void parse(std::string filename, std::vector<Recipe> &recipes) = 0;
     virtual ~IRecipeParser() {}
 };
 
 // Реализация парсера для файлов .txt
-class TextRecipeParser : public IRecipeParser {
+class TextRecipeParser : public IRecipeParser
+{
 public:
-    void parse(std::string filename, std::vector<Recipe>& recipes) override;
+    void parse(std::string filename, std::vector<Recipe> &recipes) override;
 };
 
 #endif // PARSER_H

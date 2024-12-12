@@ -20,7 +20,7 @@ int main()
 
     parser.parse("recipes.txt", r);
     orderParser.parseOrder("order.txt", o);
-    menu.start(r, cm);
+    menu.start(r, cm, o);
 
     return 0;
 }

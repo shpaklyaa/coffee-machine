@@ -45,7 +45,7 @@ int CoffeeMachine::prepareCoffee(const Recipe &r)
     int allTime = 0;
     for (auto ingredient : r.getIngredients())
     {
-        if (ingredient.first == "молоко" || ingredient.first == "сливки")
+        if (ingredient.first == "milk" || ingredient.first == "cream")
         {
             srand(time(NULL));
             for (int i = 0; i < ingredient.second; i++)
@@ -55,7 +55,7 @@ int CoffeeMachine::prepareCoffee(const Recipe &r)
                 allTime += milk.getTime();
             }
         }
-        else if (ingredient.first == "кофе")
+        else if (ingredient.first == "coffee")
         {
             srand(time(NULL));
             for (int i = 0; i < ingredient.second; i++)
@@ -66,7 +66,7 @@ int CoffeeMachine::prepareCoffee(const Recipe &r)
                 allTime += cb.getTime();
             }
         }
-        else if (ingredient.first == "вода")
+        else if (ingredient.first == "water")
         {
             for (int i = 0; i < ingredient.second; i++)
             {
@@ -75,7 +75,7 @@ int CoffeeMachine::prepareCoffee(const Recipe &r)
                 allTime += w.getTime();
             }
         }
-        else if (ingredient.first == "ванильный сахар")
+        else if (ingredient.first == "sugar")
         {
             for (int i = 0; i < ingredient.second; i++)
             {
@@ -96,7 +96,7 @@ int CoffeeMachine::prepareCoffee(const Recipe &r)
 //                     ingredient.first == "кофе" && ingredient.second == ing.second ||
 //                     ingredient.first == "вода" && ingredient.second == ing.second ||
 //                     ingredient.first == "сахар" && ingredient.second == ing.second) {
-//                         bool flag = true; 
+//                         bool flag = true;
 //                         return r.getName();
 //                 }
 //             }
@@ -107,7 +107,7 @@ int CoffeeMachine::prepareCoffee(const Recipe &r)
 //     for (size_t i = 0; i < recipes.size(); ++i) {
 //         //const Recipe &r = recipes[i];
 //         bool flag = true;
-        
+
 //         for (auto ingredient : r.getIngredients()) {
 //             bool found = false;
 //             for (auto ing : o.getIngredients()) {
@@ -121,7 +121,7 @@ int CoffeeMachine::prepareCoffee(const Recipe &r)
 //                 break;
 //             }
 //         }
-        
+
 //         if (flag) {
 //             return i;  // Возвращаем индекс найденного рецепта
 //         }

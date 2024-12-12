@@ -1,5 +1,5 @@
-#ifndef PARSER_H
-#define PARSER_H
+#ifndef ORDER_PARSER_H
+#define ORDER_PARSER_H
 
 #include <vector>
 #include <string>
@@ -7,20 +7,23 @@
 #include <iostream>
 #include <algorithm>
 #include <map>
+#include <sstream>
 
 #include "order.h"
 
 // Интерфейс парсера
-class IOrderParser {
+class IOrderParser
+{
 public:
-    virtual void parseOrder(std::string filename, std::vector<Order>& ords) = 0;
+    virtual void parseOrder(std::string filename, std::vector<Order> &ords) = 0;
     virtual ~IOrderParser() {}
 };
 
 // Реализация парсера для файлов .txt
-class TextOrderParser : public IOrderParser {
+class TextOrderParser : public IOrderParser
+{
 public:
-    void parseOrder(std::string filename, std::vector<Order>& ords) override;
+    void parseOrder(std::string filename, std::vector<Order> &ords) override;
 };
 
 #endif // PARSER_H

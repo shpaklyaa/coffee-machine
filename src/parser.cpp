@@ -2,43 +2,58 @@
 
 void TextRecipeParser::parse(std::string filename, std::vector<Recipe> &r)
 {
-    std::ifstream file;
-    file.open(filename);
+    std::ifstream file(filename);
+    if (!file.is_open())
+    {
+        std::cerr << "Ошибка открытия файла: " << filename << std::endl;
+        return;
+    }
 
     std::string line;
-
     while (std::getline(file, line))
     {
+        if (line.empty())
+            continue;
+
+        size_t colonPos = line.find(':');
+        if (colonPos == std::string::npos)
+            continue;
+
         Recipe recipe;
-        std::string name;
+        std::string recipeName = line.substr(0, colonPos);
+        recipeName.erase(std::remove_if(recipeName.begin(), recipeName.end(), ::isspace), recipeName.end());
+        recipe.setName(recipeName);
+
+        line = line.substr(colonPos + 1);
+        std::istringstream ss(line);
+        std::string ingredientPair;
+
         std::map<std::string, unsigned> ingredients;
-
-        for (auto li : line)
+        while (std::getline(ss, ingredientPair, ','))
         {
-            if (li == ':')
-                break;
-            name += li;
-        }
-        recipe.setName(name);
+            size_t nameEnd = ingredientPair.find('(');
+            size_t amountEnd = ingredientPair.find(')');
 
-        line = line.substr(line.find(':') + 1, line.size());
-        std::string name_ing;
-        std::string count_ing;
-        std::map<std::string, unsigned> ing;
-        int count = std::count(line.begin(), line.end(), ',');
-        for (int i = 0; i < count + 1; i++)
-        {
-            name_ing = line.substr(0, line.find('('));
-            line = line.substr(line.find('(') + 1, line.size());
-            count_ing = line.substr(0, line.find(')'));
-            int n = std::stoi(count_ing);
-            ing[name_ing] = n;
-            if (i < count)
+            if (nameEnd == std::string::npos || amountEnd == std::string::npos)
+                continue;
+
+            std::string name = ingredientPair.substr(0, nameEnd);
+            std::string count = ingredientPair.substr(nameEnd + 1, amountEnd - nameEnd - 1);
+
+            name.erase(std::remove_if(name.begin(), name.end(), ::isspace), name.end());
+            count.erase(std::remove_if(count.begin(), count.end(), ::isspace), count.end());
+
+            try
             {
-                line = line.substr(line.find(')') + 2, line.size());
+                int n = std::stoi(count);
+                ingredients[name] = n;
+            }
+            catch (const std::exception &)
+            {
             }
         }
-        recipe.setIngredients(ing);
+
+        recipe.setIngredients(ingredients);
         r.push_back(recipe);
     }
     file.close();
